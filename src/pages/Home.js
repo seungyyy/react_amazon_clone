@@ -57,6 +57,7 @@ const Home = () => {
           price={'14.72'}
           id={'1214749'}
           img={'https://m.media-amazon.com/images/I/61skamvk2QL._AC_UX466_.jpg'}
+          
         />
       </HomeRowComponents>
       <HomeRowComponents>
