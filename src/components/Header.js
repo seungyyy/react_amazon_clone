@@ -67,11 +67,15 @@ const SearchDiv = styled.div`
     height: 12px;
     padding: 10px;
     border: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
   }
   .header-search-icon {
     padding: 5px;
     height: 22px !important;
-    background-color: #cd9042;
+    background-color: #febd69;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
   }
 `;
 const HeaderNavList = styled.ul`

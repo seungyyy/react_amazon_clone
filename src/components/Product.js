@@ -5,8 +5,14 @@ import { updateData } from '../servives/reducer';
 
 const Product = ({ id, title, price, rating, img }) => {
   const dispatch = useDispatch();
-  const getProductData = () => { 
-    dispatch(updateData({ id: id, name: title, price, price }));
+
+  const addToBasket = () => { 
+    dispatch(updateData({
+      id: id,
+      name: title,
+      price: price,
+      img: img
+    }));
   };
 
   return (
@@ -19,13 +25,17 @@ const Product = ({ id, title, price, rating, img }) => {
             <strong>{price}</strong>
           </p>
           <div className="product-rating">
-            {Array(rating).fill().map((_, i) => ( 
-              <span key={i}>⭐</span>
-            ))}
+            {Array(rating)
+              .fill()
+              .map((_, i) => (
+                <span key={i}>⭐</span>
+              ))}
           </div>
         </div>
-        <img src={img} alt="" className="product-img"/>
-        <button onClick={getProductData} className="product-button">Add to Basket</button>
+        <img src={img} alt="" className="product-img" />
+        <button onClick={addToBasket} className="product-button">
+          Add to Basket
+        </button>
       </Content>
     </>
   );
@@ -70,9 +80,10 @@ const Content = styled.div`
   .product-button {
     margin-top: 10px;
     color: #111;
-    border: 1px solid;
-    border-color: #a88734 #9c7e31 #846a29;
-    background-color: #f0c14b;
+    padding: 5px;
+    box-sizing: border-box;
+    border: 1px solid #ffce00;
+    background-color: #ffd814;
   }
 `;
 

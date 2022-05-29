@@ -46,6 +46,7 @@ button {
   background: inherit;
   border: none;
   outline: none;
+  cursor: pointer;
 }
 input, textarea {
   outline: none;

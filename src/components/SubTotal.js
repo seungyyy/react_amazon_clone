@@ -1,27 +1,44 @@
 import React from 'react';
 import styled from 'styled-components';
 import CurrencyFormat from 'react-currency-format';
+import { useSelector } from 'react-redux';
 
 const SubTotal = () => {
+  const basketData = useSelector(state => state.reducer.basket);
+  
+  
+  function basketPriceSum(data) { 
+    if (data.length === 0) return 
+    if (data.length === 1) return data[0].price;
+    
+    let num = 0.00;
+    data.forEach((item) => { 
+      num = (parseFloat(num) + parseFloat(item.price)).toFixed(2);
+      return num;
+    })
+      
+    return num
+  }
+
   return (
     <Container>
       <CurrencyFormat
         renderText={(value) => (
           <>
             <p>
-              Subtotal(0 itmes): <strong>0</strong>
+              Subtotal({basketData.length} itmes): <strong>{value}</strong>
             </p>
             <input name="check-inp" type="checkbox" />
             <label htmlFor="check-inp">This order contains a gift</label>
           </>
         )}
         decimalScale={2}
-        value={0}
-        displayType={"text"}
+        value={basketPriceSum(basketData)}
+        displayType={'text'}
         thousandSeparator={true}
-        prefix={"$"}
+        prefix={'$'}
       />
-      <button className='subtotal-btn'>Proceed to checkout</button>
+      <button className="subtotal-btn">Proceed to checkout</button>
     </Container>
   );
 };
@@ -45,9 +62,8 @@ const Container = styled.div`
     width: 100%;
     height: 30px;
     margin-top: 20px;
-    border: 1px solid;
-    border-color: #a88734 #9c7e31 #846a29;
-    background-color: #f0c14b;
+    border: 1px solid #ffce00;
+    background-color: #ffd814;
     border-radius: 2px;
     color: #111;
   }
