@@ -1,14 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import ShoppingBasKet from '../components/ShoppingBasKet';
+import CheckoutProduct from '../components/CheckoutProduct';
 import SubTotal from '../components/SubTotal';
 
 const Checkout = () => {
+
   return (
     <Container>
       <div className="checkout-left">
         <h2>Shoppping Cart</h2>
-        <ShoppingBasKet />
+        <CheckoutProduct />
       </div>
       <SubTotal />
     </Container>
@@ -22,6 +23,7 @@ const Container = styled.section`
   box-sizing: border-box;
   .checkout-left {
     flex-grow: 3;
+    padding: 10px 15px 30px;
     background-color: #fff;
     h2 {
       margin-right: 10px;

@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { updateData } from '../servives/reducer';
 
-const Product = ({ id, title, price, rating, img }) => {
+const Product = ({ title, price, rating, img }) => {
   const dispatch = useDispatch();
 
   const addToBasket = () => { 
+    const id = Math.floor(Math.random() * 99999) + 10000
     dispatch(updateData({
       id: id,
       name: title,

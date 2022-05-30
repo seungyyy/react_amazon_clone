@@ -1,12 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import CurrencyFormat from 'react-currency-format';
 import { useSelector } from 'react-redux';
 
 const SubTotal = () => {
   const basketData = useSelector(state => state.reducer.basket);
-  
-  
+
   function basketPriceSum(data) { 
     if (data.length === 0) return 
     if (data.length === 1) return data[0].price;
@@ -22,22 +20,11 @@ const SubTotal = () => {
 
   return (
     <Container>
-      <CurrencyFormat
-        renderText={(value) => (
-          <>
-            <p>
-              Subtotal({basketData.length} itmes): <strong>{value}</strong>
-            </p>
-            <input name="check-inp" type="checkbox" />
-            <label htmlFor="check-inp">This order contains a gift</label>
-          </>
-        )}
-        decimalScale={2}
-        value={basketPriceSum(basketData)}
-        displayType={'text'}
-        thousandSeparator={true}
-        prefix={'$'}
-      />
+      <p>
+        Subtotal({basketData.length} itmes): <strong>{basketPriceSum(basketData)}</strong>
+      </p>
+      <input name="check-inp" type="checkbox" />
+      <label htmlFor="check-inp">This order contains a gift</label>
       <button className="subtotal-btn">Proceed to checkout</button>
     </Container>
   );

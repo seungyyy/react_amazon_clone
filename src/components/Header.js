@@ -3,8 +3,11 @@ import styled from 'styled-components';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Header = () => { 
+  const basketData = useSelector((state) => state.reducer.basket);
+
   return (
     <Container>
       <Link to="/">
@@ -17,7 +20,6 @@ const Header = () => {
       <SearchDiv>
         <input type="text" />
         <SearchIcon className="header-search-icon" />
-        {/* logo */}
       </SearchDiv>
       <HeaderNavList>
         <li className="header-option">
@@ -35,7 +37,9 @@ const Header = () => {
         <Link to="/checkout">
           <li className="header-shoppingBasket">
             <ShoppingBasketIcon />
-            <span className="header-option-second header-shoppingBasket-count">0</span>
+            <span className="header-option-second header-shoppingBasket-count">
+              {basketData.length}
+            </span>
           </li>
         </Link>
       </HeaderNavList>

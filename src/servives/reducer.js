@@ -15,10 +15,11 @@ export const rootReducer = createSlice({
       state.basket.push(action.payload);
     },
     removeData: (state, action) => {
-      state.basket.filter((it) => it.id !== action.payload.id);
+      state.basket = state.basket.filter((it) => it.id !== action.payload);
     },
   },
 });
+
 
 export const { updateData, removeData, resetData } = rootReducer.actions;
 

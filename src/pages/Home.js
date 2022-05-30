@@ -18,21 +18,18 @@ const Home = () => {
           }
           price={'34.99'}
           rating={3}
-          id={'1231546'}
           img={'https://m.media-amazon.com/images/I/81L8fk7SGQL._AC_SY450_.jpg'}
         />
         <Product
           title={'Funko Pop! Disney: Toy Story 4 - Jessie, Multicolor'}
           price={'24.79'}
           rating={5}
-          id={'1231587'}
           img={'https://m.media-amazon.com/images/I/71QtsVrxc8L._AC_SX425_.jpg'}
         />
         <Product
           title={'Apple AirPods Max - Space Gray'}
           price={'421.52'}
           rating={5}
-          id={'1231578'}
           img={'https://m.media-amazon.com/images/I/81jqUPkIVRL._AC_SX342_.jpg'}
         />
       </HomeRowComponents>
@@ -41,23 +38,19 @@ const Home = () => {
           title={'Listerine Total Care Anticavity Fluoride Mouthwash 1 L'}
           price={'18.89'}
           rating={4}
-          id={'1231599'}
           img={'https://m.media-amazon.com/images/I/71lzpWViySL._AC_SX522_.jpg'}
         />
         <Product
           title={'Exerpeutic Folding Exercise Bike, 8 Levels of Resistance Stationary Bike'}
           price={'93.90'}
           rating={4}
-          id={'1231749'}
           img={'https://m.media-amazon.com/images/I/61jKgHKBotL._AC_SX425_.jpg'}
         />
         <Product
           title={'Champion Ameritage Dad Adjustable Cap'}
           rating={5}
           price={'14.72'}
-          id={'1214749'}
           img={'https://m.media-amazon.com/images/I/61skamvk2QL._AC_UX466_.jpg'}
-          
         />
       </HomeRowComponents>
       <HomeRowComponents>
