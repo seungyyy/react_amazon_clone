@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 
 const SubTotal = () => {
-  const basketData = useSelector(state => state.reducer.basket);
+  const basketData = useSelector(state => state.basketData.basket);
 
   function basketPriceSum(data) { 
     if (data.length === 0) return 

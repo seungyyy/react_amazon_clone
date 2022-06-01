@@ -3,10 +3,17 @@ import styled from 'styled-components';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { loginState } from '../servives/userReducer';
 
 const Header = () => { 
-  const basketData = useSelector((state) => state.reducer.basket);
+  const basketData = useSelector((state) => state.basketData.basket);
+  const user = useSelector((state) => state.userData.user);
+  const dispatch = useDispatch();
+  console.log(user)
+  const goToSingin = () => { 
+    dispatch(loginState(true));
+  }
 
   return (
     <Container>
@@ -22,10 +29,12 @@ const Header = () => {
         <SearchIcon className="header-search-icon" />
       </SearchDiv>
       <HeaderNavList>
-        <li className="header-option">
-          <span className="header-option-one">Hello Guest</span>
-          <span className="header-ption-second">Sign in</span>
-        </li>
+        <Link to="/login" onClick={goToSingin}>
+          <li className="header-option">
+            <span className="header-option-one">Hello { }</span>
+            <span className="header-ption-second">Sign in</span>
+          </li>
+        </Link>
         <li className="header-option">
           <span className="header-option-one">Returns</span>
           <span className="header-option-second">& Orders</span>

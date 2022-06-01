@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux'; 
-import { removeData } from '../servives/reducer';
+import { removeData } from '../servives/basketReducer';
 
 const CheckoutProduct = () => {
   const dispatch = useDispatch();
-  const basketData = useSelector((state) => state.reducer.basket);
+  const basketData = useSelector((state) => state.basketData.basket);
   const leng = basketData.length;
 
   
