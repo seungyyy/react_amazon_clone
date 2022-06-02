@@ -54,6 +54,10 @@ const Content = styled.div`
   min-width: 100px;
   background-color: #fff;
   z-index: 1;
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: scale(1.03);
+  }
   .product-img {
     min-height: 200px;
     width: 100%;

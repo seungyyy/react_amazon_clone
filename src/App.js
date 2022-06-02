@@ -8,7 +8,7 @@ import Login from './pages/Login';
 import { useSelector, useDispatch } from 'react-redux';
 import { auth } from './firebase';
 import { setUser } from './service/userReducer';
-
+import Payment from './pages/Payment';
 
 function App() {
   const dispatch = useDispatch();
@@ -33,11 +33,12 @@ function App() {
     <div>
       <GlobalStyle />
       <BrowserRouter>
-       {loginState === false && <Header />}
+      {loginState === false && <Header />}
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/checkout" element={<Checkout />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/payment" element={<Payment />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

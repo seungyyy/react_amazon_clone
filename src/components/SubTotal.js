@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const SubTotal = () => {
+  const navigation = useNavigate();
   const basketData = useSelector(state => state.basketData.basket);
 
   function basketPriceSum(data) { 
@@ -25,13 +27,17 @@ const SubTotal = () => {
       </p>
       <input name="check-inp" type="checkbox" />
       <label htmlFor="check-inp">This order contains a gift</label>
-      <button className="subtotal-btn">Proceed to checkout</button>
+      <button className="subtotal-btn" onClick={() => {
+        if (basketData.length > 0) {
+          navigation('/payment');
+        };
+      }}>Proceed to checkout</button>
     </Container>
   );
 };
 
 const Container = styled.div`
-  width: 300px;
+  min-width: 280px;
   height: 150px;
   padding: 20px;
   margin-left: 15px;

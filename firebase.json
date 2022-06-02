@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "challengeproject",
+    "site": "react-challenge",
     "public": "build",
     "ignore": [
       "firebase.json",

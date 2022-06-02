@@ -5,16 +5,24 @@ import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginState } from '../service/userReducer';
+import { resetData } from '../service/basketReducer';
 import { auth } from '../firebase';
+import { signOut } from 'firebase/auth';
 
 const Header = () => { 
   const basketData = useSelector((state) => state.basketData.basket);
   const user = useSelector((state) => state.userData.user);
   const dispatch = useDispatch();
-  console.log(user)
+  
   const handleAuthentication = () => {
     if (user) {
-      auth.signOut();
+      signOut(auth)
+        .then(() => {
+          dispatch(resetData());
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } else { 
       dispatch(loginState(true));
     }

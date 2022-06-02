@@ -1,14 +1,17 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { loginState } from '../service/userReducer';
-import { auth } from '../firebase';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginState, setUser } from '../service/userReducer';
+import { resetData } from '../service/basketReducer';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase'
 
 const Login = () => {
   const navigation = useNavigate();
   const dispatch = useDispatch();
   const inputRef = useRef([]);
+  const basketData = useSelector(state => state.basketData.basket)
   const [state, setState] = useState({
     email: '',
     password: ''
@@ -45,20 +48,28 @@ const Login = () => {
       return;
     }
 
-    auth.signInWithEmailAndPassword(state.email, state.password)
-      .then(auth => { 
+    signInWithEmailAndPassword(auth, state.email, state.password)
+      .then((userCredential) => {
+        if (basketData) dispatch(resetData());
+
         dispatch(loginState(false));
-        navigation('/')
+        dispatch(
+          setUser({
+            email: userCredential.user.email,
+            uid: userCredential.user.uid,
+          })
+        );
+        navigation('/');
       })
-      .catch(err => alert(err.message))
+      .catch((err) => alert(err.message));
   }; 
 
   const handleClickRegister = (e) => { 
     e.preventDefault();
-    auth
-      .createUserWithEmailAndPassword(state.email, state.password)
+   
+    createUserWithEmailAndPassword(auth, state.email, state.password)
       .then((auth) => {
-        if (auth) { 
+        if (auth) {
           dispatch(loginState(false));
           navigation('/');
         }
