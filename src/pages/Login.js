@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { loginState } from '../servives/userReducer';
+import { loginState } from '../service/userReducer';
 import { auth } from '../firebase';
 
 const Login = () => {

@@ -3,13 +3,13 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDyI9Pq1_A_EKm6UiUVNKteJmhr6mF9kOs',
-  authDomain: 'challenge-4f07e.firebaseapp.com',
-  projectId: 'challenge-4f07e',
-  storageBucket: 'challenge-4f07e.appspot.com',
-  messagingSenderId: '444371646066',
-  appId: '1:444371646066:web:e449a84680d5473e3474eb',
-  measurementId: 'G-MK0CX93DZQ',
+  apiKey: 'AIzaSyBDcp94unF7lD6K6O4dfK8wQ6HrqlxOfCo',
+  authDomain: 'challenge-d087a.firebaseapp.com',
+  projectId: 'challenge-d087a',
+  storageBucket: 'challenge-d087a.appspot.com',
+  messagingSenderId: '496269736328',
+  appId: '1:496269736328:web:db71fc0ad7b444470a223d',
+  measurementId: 'G-FLPW1LKC6Q',
 };
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);

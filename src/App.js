@@ -7,7 +7,7 @@ import Checkout from './pages/Checkout';
 import Login from './pages/Login';
 import { useSelector, useDispatch } from 'react-redux';
 import { auth } from './firebase';
-import { setUser } from './servives/userReducer';
+import { setUser } from './service/userReducer';
 
 
 function App() {

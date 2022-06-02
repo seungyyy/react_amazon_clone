@@ -4,7 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { loginState } from '../servives/userReducer';
+import { loginState } from '../service/userReducer';
 import { auth } from '../firebase';
 
 const Header = () => { 

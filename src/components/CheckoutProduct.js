@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux'; 
-import { removeData } from '../servives/basketReducer';
+import { removeData } from '../service/basketReducer';
 
 const CheckoutProduct = () => {
   const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { updateData } from '../servives/basketReducer';
+import { updateData } from '../service/basketReducer';
 
 const Product = ({ title, price, rating, img }) => {
   const dispatch = useDispatch();
