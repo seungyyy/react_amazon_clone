@@ -5,15 +5,20 @@ import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginState } from '../servives/userReducer';
+import { auth } from '../firebase';
 
 const Header = () => { 
   const basketData = useSelector((state) => state.basketData.basket);
   const user = useSelector((state) => state.userData.user);
   const dispatch = useDispatch();
   console.log(user)
-  const goToSingin = () => { 
-    dispatch(loginState(true));
-  }
+  const handleAuthentication = () => {
+    if (user) {
+      auth.signOut();
+    } else { 
+      dispatch(loginState(true));
+    }
+  };
 
   return (
     <Container>
@@ -29,10 +34,12 @@ const Header = () => {
         <SearchIcon className="header-search-icon" />
       </SearchDiv>
       <HeaderNavList>
-        <Link to="/login" onClick={goToSingin}>
+        <Link to={!user && '/login'}>
           <li className="header-option">
-            <span className="header-option-one">Hello { }</span>
-            <span className="header-ption-second">Sign in</span>
+            <span className="header-option-one">Hello {user ? user.email : 'Guest'}</span>
+            <span className="header-option-second" onClick={handleAuthentication}>
+              {user ? 'Sign Out' : 'Sign in'}
+            </span>
           </li>
         </Link>
         <li className="header-option">

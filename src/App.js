@@ -16,7 +16,6 @@ function App() {
 
   useEffect(() => { 
     auth.onAuthStateChanged(userAuth => { 
-      //console.log('user', userAuth._delegate.email);
       if (userAuth) {
         dispatch(
           setUser({
