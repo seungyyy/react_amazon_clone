@@ -3,22 +3,22 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+export const basketPriceSum = (data) => {
+  if (data.length === 0) return;
+  if (data.length === 1) return data[0].price;
+
+  let num = 0.0;
+  data.forEach((item) => {
+    num = (parseFloat(num) + parseFloat(item.price)).toFixed(2);
+    return num;
+  });
+
+  return num;
+  }
+
 const SubTotal = () => {
   const navigation = useNavigate();
   const basketData = useSelector(state => state.basketData.basket);
-
-  function basketPriceSum(data) { 
-    if (data.length === 0) return 
-    if (data.length === 1) return data[0].price;
-    
-    let num = 0.00;
-    data.forEach((item) => { 
-      num = (parseFloat(num) + parseFloat(item.price)).toFixed(2);
-      return num;
-    })
-      
-    return num
-  }
 
   return (
     <Container>

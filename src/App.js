@@ -9,6 +9,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { auth } from './firebase';
 import { setUser } from './service/userReducer';
 import Payment from './pages/Payment';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js'
+
+const promise = loadStripe(
+  'pk_test_51L6FL1BuvVzmK9LppzUDCOPgKTqseynv2ODAOh1Z9qbFmvtQ7ukvt4QlFi2RcVw6Tr9IeJWyh6lhJnivUHOZU4Xn00Po1Dt6JF'
+);
 
 function App() {
   const dispatch = useDispatch();
@@ -38,7 +44,12 @@ function App() {
           <Route path="/" element={<Home />}></Route>
           <Route path="/checkout" element={<Checkout />}></Route>
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/payment" element={<Payment />}></Route>
+            <Route path="/payment" element={
+              <Elements stripe={promise}>
+              <Payment />
+              </Elements>
+            }>
+            </Route>
         </Routes>
       </BrowserRouter>
     </div>
