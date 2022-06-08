@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import GlobalStyle from './GlobalStyle';
 import Checkout from './pages/Checkout';
 import Login from './pages/Login';
+import Order from './pages/Order';
 import { useSelector, useDispatch } from 'react-redux';
 import { auth } from './firebase';
 import { setUser } from './service/userReducer';
@@ -19,37 +20,43 @@ const promise = loadStripe(
 function App() {
   const dispatch = useDispatch();
   const loginState = useSelector(state => state.userData.login)
-
+  const userState = useSelector(state => state.userData.user)
+  
   useEffect(() => { 
-    auth.onAuthStateChanged(userAuth => { 
-      if (userAuth) {
-        dispatch(
-          setUser({
-            email: userAuth._delegate.email,
-            uid: userAuth._delegate.uid,
-          })
-        );
-      } else { 
-        dispatch(setUser(null));
-      }
-    })
+    if (userState) {
+      auth.onAuthStateChanged((userAuth) => {
+        if (userAuth) {
+          dispatch(
+            setUser({
+              email: userAuth._delegate.email,
+              uid: userAuth._delegate.uid,
+            })
+          );
+        } else {
+          dispatch(setUser(null));
+        }
+      });
+    }
   }, [])
 
   return (
     <div>
       <GlobalStyle />
       <BrowserRouter>
-      {loginState === false && <Header />}
+        {loginState === false && <Header />}
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/checkout" element={<Checkout />}></Route>
           <Route path="/login" element={<Login />}></Route>
-            <Route path="/payment" element={
+          <Route path="/orders" element={<Order />}></Route>
+          <Route
+            path="/payment"
+            element={
               <Elements stripe={promise}>
-              <Payment />
+                <Payment />
               </Elements>
-            }>
-            </Route>
+            }
+          ></Route>
         </Routes>
       </BrowserRouter>
     </div>

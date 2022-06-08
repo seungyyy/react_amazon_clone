@@ -17,10 +17,13 @@ export const basketReducer = createSlice({
     removeData: (state, action) => {
       state.basket = state.basket.filter((it) => it.id !== action.payload);
     },
+    emptyData: (state) => {
+      Object.assign(state, initialState);
+    },
   },
 });
 
 
-export const { updateData, removeData, resetData } = basketReducer.actions;
+export const { updateData, removeData, resetData, emptyData } = basketReducer.actions;
 
 export default basketReducer.reducer;

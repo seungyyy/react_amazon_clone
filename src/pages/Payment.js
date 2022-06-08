@@ -6,6 +6,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { basketPriceSum } from '../components/SubTotal';
 import axios from '../axios';
+import { useDispatch } from 'react-redux';
+import { emptyData } from '../service/basketReducer';
+import { db } from '../firebase';
+import { collection, addDoc } from 'firebase/firestore';
+
 
 const Payment = () => {
   const userData = useSelector(state => state.userData.user)
@@ -15,21 +20,29 @@ const Payment = () => {
   const [succeeded, setSucceeded] = useState(false);
   const [processing, setProcessing] = useState('');
   const [clientSecret, setClientSecret] = useState(true);
-   
+  
+  const dispatch = useDispatch();
   const navigation = useNavigate();
   const stripe = useStripe();
   const elements = useElements();
-
+  
   useEffect(() => {
     // generate the special stripe secret which allows us to charge a customer
     const getClientSecret = async () => {
-      const response = await axios({
-        method: 'post',
-        // stripe expects the total in a currencies subunits
-        url: `/payments/create?total=${basketPriceSum(basketData) * 100}`,
-      });
-      setClientSecret(response.data.clientSecret)
-    };
+      try {
+        const response = await axios({
+          method: 'post',
+          // stripe expects the total in a currencies subunits
+          url: `/payments/create?total=${basketPriceSum(basketData) * 100}`,
+        });
+        console.log(response.data.clientSecret);
+
+        setClientSecret(response.data.clientSecret)
+      } catch (e) { 
+        console.log(e.message)
+      } 
+     
+    }
 
     getClientSecret()
   }, [basketData])
@@ -47,9 +60,39 @@ const Payment = () => {
       }
     }).then(({ paymentIntent }) => { 
       // paymentIntent = payment confirmation
+      try {
+        const doc = addDoc(collection(db, 'users'), {})
+          .addDoc(userData?.uid)
+          .addDoc(collection('users', 'orders'), {})
+          .addDoc(paymentIntent.id)
+          .set({
+            basket: basketData,
+            amount: paymentIntent.amount,
+            created: paymentIntent.created,
+          });
+        console.log(doc)
+          //await addDoc(collection(db, 'users'),)
+      } catch (e) { 
+         console.error('Error adding document: ', e);
+      }
+
+      
+      
+      // db.collection('users')
+      //   .doc(users?.id)
+      //   .collection('orders')
+      //   .doc(paymentIntent)
+      //   .set({
+      //     basket: basketData,
+      //     amount: paymentIntent.amount,
+      //     created: paymentIntent.created,
+      //   })
+
       setSucceeded(true);
       setError(null);
       setProcessing(false);
+
+      dispatch(emptyData())
 
       navigation('/orders', {replace: true});
     })
